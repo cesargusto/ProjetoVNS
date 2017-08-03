@@ -102,6 +102,15 @@ public class Solution implements Cloneable{
 			System.out.printf("\n TF... %d \n", this.getMac(i).getTempofinal());
 		}
 	}
+	public void imprimeMaq(int i) {
+		int qJobs = this.solution.get(i).getMachine().size();
+		for(int j = 0;j < qJobs;j++){
+			System.out.printf(" [ %d ]--", this.getMac(i).getMachine().get(j).getJobPrepTime());
+			System.out.printf("( %d ) ", this.getMac(i).getMachine().get(j).getJobExecTime());
+		}
+		System.out.printf("\n TF... %d \n", this.getMac(i).getTempofinal());
+		
+	}
 	
 	public void printDados(){
 		System.out.println(this.getMac(0).getMachine().get(0).getJobExecTime());

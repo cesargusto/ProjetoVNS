@@ -20,6 +20,8 @@ public class Machine {
 	
 	public void swapJob(int i, int j){
 		Collections.swap(machine, i, j);
+		atualizaMaq();
+		/*
 		if(i == 0){
 			machine.get(j).setJobAnt(null);
 			machine.get(i).setJobAnt(this.machine.get(j - 1));
@@ -27,6 +29,16 @@ public class Machine {
 		else{
 			machine.get(i).setJobAnt(this.machine.get(i - 1));
 			machine.get(j).setJobAnt(this.machine.get(j - 1));
+		}*/
+	}
+	
+	public void atualizaMaq() {
+		for(int i = 0;i < machine.size();i++) {
+			if(i == 0)
+				machine.get(i).setJobAnt(null);
+			else {
+				machine.get(i).setJobAnt(machine.get(i -1));
+			}
 		}
 	}
 	

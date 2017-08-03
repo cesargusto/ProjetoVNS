@@ -1,0 +1,62 @@
+package com.vns.PROBLEM.UPMSTP;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Machine {
+
+	private ArrayList<Job> machine;
+	private int qtJobs;
+	private int tempofinal;
+	
+	public Machine(ArrayList<Job> maquina){
+		this.machine = maquina;
+		this.qtJobs = this.machine.size();
+	}
+	public Machine(){
+		this.machine = new ArrayList<>();
+		this.qtJobs = this.machine.size();
+	}
+	
+	public void swapJob(int i, int j){
+		Collections.swap(machine, i, j);
+		if(i == 0){
+			machine.get(j).setJobAnt(null);
+			machine.get(i).setJobAnt(this.machine.get(j - 1));
+		}
+		else{
+			machine.get(i).setJobAnt(this.machine.get(i - 1));
+			machine.get(j).setJobAnt(this.machine.get(j - 1));
+		}
+	}
+	
+	public ArrayList<Job> getMachine() {
+		return machine;
+	}
+
+	public void setMachine(ArrayList<Job> machine) {
+		this.machine = machine;
+	}
+
+
+	public int getQtJobs() {
+		return qtJobs;
+	}
+
+	public void setQtJobs(int qtJobs) {
+		this.qtJobs = qtJobs;
+	}
+
+	public int getTempofinal() {
+		this.tempofinal = 0;
+		for(int i = 0;i < this.machine.size();i++){
+			this.tempofinal += this.machine.get(i).getJobTempToal();
+		}
+		return tempofinal;
+	}
+
+	public void setJob(Job job) {
+		this.machine.add(job);
+	}
+
+}

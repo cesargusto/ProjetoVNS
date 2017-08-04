@@ -66,7 +66,7 @@ public class Job {
 	}
 
 	public int getJobTempToal() {
-		return jobTempToal;
+		return jobExecTime + jobPrepTime;
 	}
 
 	public void setJobTempToal(int jobTempToal) {

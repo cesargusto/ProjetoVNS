@@ -104,6 +104,10 @@ public class Solution implements Cloneable{
 	}
 	public void imprimeMaq(int i) {
 		int qJobs = this.solution.get(i).getMachine().size();
+		for(int j = 0; j < qJobs;j++){
+			System.out.printf(" { %d } ", this.getMac(i).getMachine().get(j).getNumJob());
+		}
+		System.out.println();
 		for(int j = 0;j < qJobs;j++){
 			System.out.printf(" [ %d ]--", this.getMac(i).getMachine().get(j).getJobPrepTime());
 			System.out.printf("( %d ) ", this.getMac(i).getMachine().get(j).getJobExecTime());

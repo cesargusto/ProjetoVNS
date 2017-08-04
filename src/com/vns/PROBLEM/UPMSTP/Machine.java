@@ -3,6 +3,8 @@ package com.vns.PROBLEM.UPMSTP;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.vns.STRUCTURE.Instance;
+
 public class Machine {
 
 	private ArrayList<Job> machine;
@@ -18,26 +20,20 @@ public class Machine {
 		this.qtJobs = this.machine.size();
 	}
 	
-	public void swapJob(int i, int j){
-		Collections.swap(machine, i, j);
-		atualizaMaq();
-		/*
-		if(i == 0){
-			machine.get(j).setJobAnt(null);
-			machine.get(i).setJobAnt(this.machine.get(j - 1));
-		}
-		else{
-			machine.get(i).setJobAnt(this.machine.get(i - 1));
-			machine.get(j).setJobAnt(this.machine.get(j - 1));
-		}*/
+	public void swapJob(int i, int x, int j){
+		Collections.swap(machine, x, j);
+		atualizaMaq(i);
 	}
 	
-	public void atualizaMaq() {
+	public void atualizaMaq(int nummaq) {
 		for(int i = 0;i < machine.size();i++) {
-			if(i == 0)
+			if(i == 0){
 				machine.get(i).setJobAnt(null);
+				machine.get(i).setJobPrepTime(0);
+			}
 			else {
-				machine.get(i).setJobAnt(machine.get(i -1));
+				machine.get(i).setJobAnt(machine.get(i - 1));
+				machine.get(i).setJobPrepTime(Instance.getMat(nummaq)[machine.get(i-1).getNumJob()][machine.get(i).getNumJob()]);
 			}
 		}
 	}

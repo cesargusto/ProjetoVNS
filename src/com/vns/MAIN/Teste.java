@@ -11,10 +11,15 @@ public class Teste {
 		Solution so2 = new Solution();
 		LocalSearch ls = new LocalSearch();
 		so.RandInitSolution();
-		so.imprimeMaq(0);
-		so.getMac(0).swapJob(0, 1);
-		so.imprimeMaq(0);
-		//so2 = ls.best_improvement(so);
+		so.imprimeSolution();
+		System.out.println("\nMakespan solucao inicial: \t\t"+so.getMakespan());
+		System.out.println("------------------------------");
+		
+		so2 = ls.best_improvement(so);
+		
+		System.out.println("------------------------------");
+		so2.imprimeSolution();
+		System.out.println("\nMakespan solucao inicial: \t\t"+so2.getMakespan());
 
 	}
 

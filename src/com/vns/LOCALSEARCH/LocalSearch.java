@@ -11,30 +11,35 @@ import com.vns.STRUCTURE.Instance;
 import com.vns.STRUCTURE.Solution;
 
 public class LocalSearch {
-
+	
+	private int melhor_mspan;
+	private Solution melhor_solution;
+	
 	public Solution best_improvement(Solution solution) throws CloneNotSupportedException{
-		int melhor_mspan = Integer.MAX_VALUE;
-		Solution melhor_solution = new Solution();
 		
-		if(solution.getMakespan() < melhor_mspan){
-			System.out.println("mspan anterior: "+melhor_mspan);
-			melhor_mspan = solution.getMakespan();
+		melhor_mspan = Integer.MAX_VALUE;
+		melhor_solution = new Solution();
+		
+		int mkspan1 = solution.getMakespan(); 
+		if(mkspan1 < melhor_mspan){
+			//System.out.println("mspan anterior: "+melhor_mspan);
+			melhor_mspan = mkspan1;
 			melhor_solution = solution.clone();
-			System.out.println("mspan atual: "+melhor_mspan);
+			solution.limpaMakespan();
+			//System.out.println("mspan atual: "+melhor_mspan);
 		}
 		for(int i = 0;i < Instance.numMachines;i++){
 			int x = 0;
 			int contador = solution.getMac(i).getMachine().size();
 			while(x < contador){
-				for(int j = 1;j < solution.getMac(i).getMachine().size();j++){
-					//solution.imprimeSolution();
-					//solution.imprimeMaq(0);
+				for(int j = 1;j < contador;j++){
 					solution.getMac(i).swapJob(i, x, j);
-					solution.imprimeMaq(0);
-					//solution.imprimeSolution();
-					if(solution.getMakespan() < melhor_mspan){
-						melhor_mspan = solution.getMakespan();
+					int mkspan2 = solution.getMakespan(); 
+					solution.imprimeSolution();
+					if(mkspan2 < melhor_mspan){
+						melhor_mspan = mkspan2;
 						melhor_solution = solution.clone();
+						solution.limpaMakespan();
 					}
 					solution.getMac(i).swapJob(i, x, j);
 				}
@@ -45,8 +50,16 @@ public class LocalSearch {
 	}
 
 	public Solution first_improvement(Solution solution){
-
-		
 		return solution;
 	}
+
+	public int getMelhor_mspan() {
+		return melhor_mspan;
+	}
+
+	public Solution getMelhor_solution() {
+		return melhor_solution;
+	}
+	
+	
 }

@@ -12,15 +12,8 @@ public class Teste {
 		LocalSearch ls = new LocalSearch();
 		so.RandInitSolution();
 		so.imprimeSolution();
-		System.out.println("\nMakespan solucao inicial: \t\t"+so.getMakespan());
-		System.out.println("------------------------------");
-		
 		so2 = ls.best_improvement(so);
-		
-		System.out.println("------------------------------");
-		so2.imprimeSolution();
-		System.out.println("\nMakespan solucao inicial: \t\t"+so2.getMakespan());
-
+		System.out.println("\nMelhor Makespan:\t\t"+ls.getMelhor_mspan());
 	}
 
 }

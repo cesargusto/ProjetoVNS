@@ -31,6 +31,10 @@ public class Solution implements Cloneable{
 		return (Solution) super.clone();
 	}
 
+	public void limpaMakespan() {
+		this.makespan.clear();
+	}
+	
 	public void RandInitSolution(){
 
 		for(int i = 0;i < Instance.numMachines;i++){
@@ -62,6 +66,7 @@ public class Solution implements Cloneable{
 	}
 
 	public int getMakespan() {
+		
 		for(int i = 0; i < this.solution.size();i++){
 			this.makespan.add(solution.get(i).getTempofinal());
 		}
@@ -101,7 +106,10 @@ public class Solution implements Cloneable{
 			}
 			System.out.printf("\n TF... %d \n", this.getMac(i).getTempofinal());
 		}
+		System.out.println("Makespan: \t"+this.getMakespan());
+		this.limpaMakespan();
 	}
+	
 	public void imprimeMaq(int i) {
 		int qJobs = this.solution.get(i).getMachine().size();
 		for(int j = 0; j < qJobs;j++){

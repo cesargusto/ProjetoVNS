@@ -13,6 +13,11 @@ public class Job {
 	public Job(){
 		
 	}
+	
+	public Job(int numjob){
+		this.numJob = numjob;
+	}
+	
 	public Job(int numjob, int nummaq, Job ant){
 		this.numJob = numjob;
 		this.numMaq = nummaq;

@@ -22,18 +22,15 @@ public class LocalSearch {
 		
 		int mkspan1 = solution.getMakespan(); 
 		if(mkspan1 < melhor_mspan){
-			//System.out.println("mspan anterior: "+melhor_mspan);
 			melhor_mspan = mkspan1;
 			melhor_solution = solution.clone();
 			solution.limpaMakespan();
-			//System.out.println("mspan atual: "+melhor_mspan);
 		}
 		for(int i = 0;i < Instance.numMachines;i++){
-			int x = 0;
-			int contador = solution.getMac(i).getMachine().size();
-			while(x < contador){
-				for(int j = 1;j < contador;j++){
-					solution.getMac(i).swapJob(i, x, j);
+			int tam_maq = solution.getMac(i).getMachine().size();
+			for(int k = 0;k < tam_maq;k++){
+				for(int j = k+1;j < tam_maq;j++){
+					solution.getMac(i).swapJob(i, k, j);
 					int mkspan2 = solution.getMakespan(); 
 					solution.imprimeSolution();
 					if(mkspan2 < melhor_mspan){
@@ -41,9 +38,8 @@ public class LocalSearch {
 						melhor_solution = solution.clone();
 						solution.limpaMakespan();
 					}
-					solution.getMac(i).swapJob(i, x, j);
+					solution.getMac(i).swapJob(i, k, j);
 				}
-				x ++;
 			}
 		}
 		return melhor_solution;

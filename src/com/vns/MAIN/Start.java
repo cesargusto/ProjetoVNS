@@ -2,6 +2,7 @@ package com.vns.MAIN;
 
 import com.vns.LOCALSEARCH.LocalSearch;
 import com.vns.STRUCTURE.Instance;
+import com.vns.STRUCTURE.Solucao;
 import com.vns.STRUCTURE.Solution;
 
 /* 
@@ -14,16 +15,15 @@ import com.vns.STRUCTURE.Solution;
 
 public class Start {
 
-	public static void main(String[] args) throws CloneNotSupportedException {
+	public static void main(String[] args){
 		
-		Solution so = new Solution();
-		Solution so2 = new Solution();
-		LocalSearch ls = new LocalSearch();
-		so.RandInitSolution();
-		so.imprimeSolution();
-		System.out.println("\nMakespan solucao inicial: \t\t"+so.getMakespan());
-		so2 = ls.best_improvement(so);
-		so2.imprimeSolution();
-		System.out.println("\nMakespan melhor vizinho : \t\t"+so2.getMakespan());
+		Solucao so = new Solucao();
+		so.ConstroiSolution();
+		so.imprimeSolucao();
+		so.task_move();
+		so.imprimeSolucao();
+		so.shift();
+		so.imprimeSolucao();
+
 	}
 }

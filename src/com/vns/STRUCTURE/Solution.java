@@ -35,6 +35,13 @@ public class Solution implements Cloneable{
 		this.makespan.clear();
 	}
 	
+	public void ConstroiSolution(){
+		ArrayList<Job> candidatos = new ArrayList<>();
+		for(int i = 0;i < Instance.numJobs;i++){
+			candidatos.add(new Job(i));
+		}
+		
+	}
 	public void RandInitSolution(){
 
 		for(int i = 0;i < Instance.numMachines;i++){
@@ -65,6 +72,10 @@ public class Solution implements Cloneable{
 		this.solution.add(machine);
 	}
 
+	public void InsereTarefa(int maq, Job job){
+		this.solution.get(maq).setJob(job);
+	}
+	
 	public int getMakespan() {
 		
 		for(int i = 0; i < this.solution.size();i++){

@@ -1,6 +1,7 @@
 package com.vns.PROBLEM.UPMSTP;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.vns.STRUCTURE.Instance;
 
@@ -46,6 +47,10 @@ public class Maquina {
 	
 	public void removeJob(int pos){
 		this.maquina.remove(pos);
+	}
+
+	public void trocaJob(int i, int j){
+		Collections.swap(this.maquina, i, j);
 	}
 	
 	

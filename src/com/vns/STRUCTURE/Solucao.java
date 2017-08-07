@@ -120,6 +120,79 @@ public class Solucao {
 		this.solucao.get(indice_maior).removeJob(pm1);
 	}
 	
+	public void Switch() {
+		Random rnd = new Random();
+		ArrayList<Integer> maior_menor = new ArrayList<>(this.maior_menor());
+		
+		int indice_maior = maior_menor.get(2);
+		
+		int pm1 = -1;
+		int pm2 = -1;
+		
+		while(pm1 == pm2){
+			pm1 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
+			pm2 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
+		}
+		
+		this.solucao.get(indice_maior).trocaJob(pm1, pm2);
+		
+	}
+	
+	public void Swap() {
+		Random rnd = new Random();
+		
+		int indice_maq1 = -1;
+		int indice_maq2 = -1;
+		
+		while(indice_maq1 == indice_maq2) {
+			indice_maq1 = rnd.nextInt(Instance.numMachines);
+			indice_maq2 = rnd.nextInt(Instance.numMachines);
+		}
+		int tamanho_maq = this.getMaq(indice_maq1).getTamMaq();
+		int pm1_m1 = rnd.nextInt(tamanho_maq);
+		int	pm2_m1 = rnd.nextInt(this.getMaq(indice_maq1).getTamMaq());
+		
+		int pm1_m2 = rnd.nextInt(this.getMaq(indice_maq2).getTamMaq());
+		int	pm2_m2 = rnd.nextInt(this.getMaq(indice_maq2).getTamMaq());
+		
+		int job_m1 = this.solucao.get(indice_maq1).getJob(pm1_m1); 
+		this.solucao.get(indice_maq2).setJobMaq(pm1_m2, job_m1);
+		this.solucao.get(indice_maq1).removeJob(pm1_m1);
+		
+		int job_m2 = this.solucao.get(indice_maq2).getJob(pm2_m2); 
+		this.solucao.get(indice_maq1).setJobMaq(pm2_m1, job_m2);
+		this.solucao.get(indice_maq2).removeJob(pm2_m2);
+		
+	}
+	
+	public void two_realloc(){
+		Random rnd = new Random();
+		
+		ArrayList<Integer> maior_menor = new ArrayList<>(this.maior_menor());
+		
+		int indice_maior = maior_menor.get(2);
+		
+		int pm1 = -1;
+		int pm2 = -1;
+		
+		while(pm1 == pm2){
+			pm1 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
+			pm2 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
+		}
+		
+		this.solucao.get(indice_maior).trocaJob(pm1, pm2);
+		
+		pm1 = -1;
+		pm2 = -1;
+		
+		while(pm1 == pm2){
+			pm1 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
+			pm2 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
+		}
+		
+		this.solucao.get(indice_maior).trocaJob(pm1, pm2);
+	}
+	
 	public ArrayList<Maquina> getSolucao() {
 		return solucao;
 	}

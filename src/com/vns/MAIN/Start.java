@@ -20,10 +20,14 @@ public class Start {
 		Solucao so = new Solucao();
 		so.ConstroiSolution();
 		so.imprimeSolucao();
-		so.task_move();
+		so.two_realloc();
+		so.imprimeSolucao();
+		/*so.task_move();
 		so.imprimeSolucao();
 		so.shift();
 		so.imprimeSolucao();
+		so.Switch();
+		so.imprimeSolucao();*/
 
 	}
 }

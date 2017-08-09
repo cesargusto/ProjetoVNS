@@ -6,7 +6,7 @@ import java.util.Random;
 
 import com.vns.PROBLEM.UPMSTP.*;
 
-public class Solucao {
+public class Solucao implements Cloneable{
 
 	private ArrayList<Maquina> solucao;
 	
@@ -16,6 +16,21 @@ public class Solucao {
 	public Solucao(Maquina maq){
 		this.solucao = new ArrayList<>();
 		this.solucao.add(maq);
+	}
+	
+	@Override
+	public Solucao clone() throws CloneNotSupportedException {
+		Solucao solCp = new Solucao();
+		int tam = solucao.size();
+		for(int i = 0;i < tam;i++){
+			solCp.solucao.add(new Maquina());
+			int tam_mq = this.solucao.get(i).getTamMaq();
+			for(int j = 0;j < tam_mq;j++){
+				int elemento = this.solucao.get(i).getJob(j);
+				solCp.getMaq(i).setJobMaq(elemento);
+			}
+		}
+		return solCp;
 	}
 	
 	public void ConstroiSolution(){
@@ -34,7 +49,7 @@ public class Solucao {
 				k++;
 				if(k >= Instance.numJobs)
 					break;
-				} 
+			} 
 		}
 	}
 	
@@ -191,6 +206,31 @@ public class Solucao {
 		}
 		
 		this.solucao.get(indice_maior).trocaJob(pm1, pm2);
+	}
+	
+	public void gera_vizinho(){
+		Random rnd = new Random();
+		int num_movimentos = 5;
+		int opcao = 1 + rnd.nextInt(num_movimentos);
+		switch(opcao){
+		case 1:
+			task_move();
+			break;
+		case 2:
+			shift();
+			break;
+		case 3:
+			Switch();
+			break;
+		case 4:
+			Swap();
+			break;
+		case 5:
+			two_realloc();
+			break;
+		default:
+			System.out.println("Problema com o valor aleatório.");
+		}
 	}
 	
 	public ArrayList<Maquina> getSolucao() {

@@ -20,7 +20,7 @@ public class Start {
 		Solucao so = new Solucao();
 		so.ConstroiSolution();
 		so.imprimeSolucao();
-		so.two_realloc();
+		so.Swap();
 		so.imprimeSolucao();
 		/*so.task_move();
 		so.imprimeSolucao();

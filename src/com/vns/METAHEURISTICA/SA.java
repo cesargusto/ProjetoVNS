@@ -20,9 +20,9 @@ public class SA {
 	
 	public SA(Solucao solucao) {
 		this.solucao = solucao;
-		this.T_INICIAL = 800.0;
+		this.T_INICIAL = 100.0;
 		this.ALF = 0.9;
-		this.SAMAX = 100;
+		this.SAMAX = 10;
 	}
 	
 	public void execute() throws CloneNotSupportedException {
@@ -45,18 +45,20 @@ public class SA {
 				solucao_linha.gera_vizinho();
 				fo_solucao_linha = solucao_linha.makespan();
 				
+				solucao_linha.imprimeSolucao();
+				
 				long Alfa = fo_solucao_linha - fo_solucao;
 				
-				if(Alfa <= 0){
+				if(Alfa < 0){
 					solucao = solucao_linha.clone();					
-					if(fo_solucao_linha > melhor_solucao.makespan()){
+					if(fo_solucao_linha < melhor_solucao.makespan()){
 						melhor_solucao = solucao.clone();
 					}
 					//tb.setMelhores_fo(fo_s_linha); guardar evolução do algoritmo
 				}
 				else{
 					Double x = rnd.nextDouble();
-					Double exp = Math.pow(Math.E, (Alfa/T)); 
+					Double exp = Math.pow(Math.E, (-1*Alfa)/T); 
 					if(x < exp){
 						solucao = solucao_linha.clone();
 					}
@@ -69,6 +71,7 @@ public class SA {
 		}
 		//tb.setMelhor_so_sa_global(s_melhor);
 		solucao = melhor_solucao.clone();
-		System.out.println("\n\nMELHOR SOLUÇÃO ENCONTRDA:\t\t"+solucao.makespan());
+		System.out.println("\n\nMELHOR SOLUÇÃO ENCONTRDA:");
+		solucao.imprimeSolucao();
 	}
 }

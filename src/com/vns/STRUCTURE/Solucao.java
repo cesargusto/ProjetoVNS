@@ -127,12 +127,13 @@ public class Solucao implements Cloneable{
 		
 		while(pm1 == pm2){
 			pm1 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
-			pm2 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
+			pm2 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq() - 1);
 		}
 		
 		int job = this.solucao.get(indice_maior).getJob(pm1);
-		this.solucao.get(indice_maior).setJobMaq(pm2, job);
 		this.solucao.get(indice_maior).removeJob(pm1);
+		this.solucao.get(indice_maior).setJobMaq(pm2, job);
+		
 	}
 	
 	public void Switch() {
@@ -148,9 +149,7 @@ public class Solucao implements Cloneable{
 			pm1 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
 			pm2 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
 		}
-		
-		this.solucao.get(indice_maior).trocaJob(pm1, pm2);
-		
+		this.solucao.get(indice_maior).trocaJob(pm1, pm2);	
 	}
 	
 	public void Swap() {
@@ -159,24 +158,40 @@ public class Solucao implements Cloneable{
 		int indice_maq1 = -1;
 		int indice_maq2 = -1;
 		
+		//test if not same machines
 		while(indice_maq1 == indice_maq2) {
 			indice_maq1 = rnd.nextInt(Instance.numMachines);
 			indice_maq2 = rnd.nextInt(Instance.numMachines);
 		}
-		int tamanho_maq = this.getMaq(indice_maq1).getTamMaq();
-		int pm1_m1 = rnd.nextInt(tamanho_maq);
-		int	pm2_m1 = rnd.nextInt(this.getMaq(indice_maq1).getTamMaq());
 		
-		int pm1_m2 = rnd.nextInt(this.getMaq(indice_maq2).getTamMaq());
-		int	pm2_m2 = rnd.nextInt(this.getMaq(indice_maq2).getTamMaq());
+		//get the size of machine chosen
+		int tamanho_maq1 = this.getMaq(indice_maq1).getTamMaq();
+		int p1_m1 = rnd.nextInt(tamanho_maq1);//get a random position in this machine
+		//get the job of random position
+		int job_m1 = this.solucao.get(indice_maq1).getJob(p1_m1); 
+		//get the size of the second machine
+		int tamanho_maq2 = this.getMaq(indice_maq2).getTamMaq();
+		int p1_m2 = rnd.nextInt(tamanho_maq2);
+		//set the job of first machine in random position of the second machine
+		this.solucao.get(indice_maq2).setJobMaq(p1_m2, job_m1);
+		this.solucao.get(indice_maq1).removeJob(p1_m1);	//remove this job of first machine	
 		
-		int job_m1 = this.solucao.get(indice_maq1).getJob(pm1_m1); 
-		this.solucao.get(indice_maq2).setJobMaq(pm1_m2, job_m1);
-		this.solucao.get(indice_maq1).removeJob(pm1_m1);
 		
-		int job_m2 = this.solucao.get(indice_maq2).getJob(pm2_m2); 
-		this.solucao.get(indice_maq1).setJobMaq(pm2_m1, job_m2);
-		this.solucao.get(indice_maq2).removeJob(pm2_m2);
+		tamanho_maq2 = this.getMaq(indice_maq2).getTamMaq();
+		p1_m2 = rnd.nextInt(tamanho_maq2);
+		
+		int job_m2 = this.solucao.get(indice_maq2).getJob(p1_m2); 
+		//test if it the same job
+		while(job_m1 == job_m2) {
+			p1_m2 = rnd.nextInt(tamanho_maq2);
+			job_m2 = this.solucao.get(indice_maq2).getJob(p1_m2);
+		}
+
+		tamanho_maq1 = this.getMaq(indice_maq1).getTamMaq();
+		int p2_m1 = rnd.nextInt(tamanho_maq1);
+		
+		this.solucao.get(indice_maq1).setJobMaq(p2_m1, job_m2);
+		this.solucao.get(indice_maq2).removeJob(p1_m2);
 		
 	}
 	
@@ -209,6 +224,9 @@ public class Solucao implements Cloneable{
 	}
 	
 	public void gera_vizinho(){
+		ArrayList<Integer> maior_menor = new ArrayList<>(this.maior_menor());
+		int indice_maior = maior_menor.get(2);
+		
 		Random rnd = new Random();
 		int num_movimentos = 5;
 		int opcao = 1 + rnd.nextInt(num_movimentos);
@@ -223,14 +241,21 @@ public class Solucao implements Cloneable{
 			Switch();
 			break;
 		case 4:
-			Swap();
+			if(solucao.get(maior_menor.get(0)).getTamMaq() > 2)
+				Swap();
+			else
+				task_move();
 			break;
 		case 5:
-			two_realloc();
+			if(solucao.get(indice_maior).getTamMaq() > 2)
+				two_realloc();
+			else
+				Switch();
 			break;
 		default:
 			System.out.println("Problema com o valor aleatório.");
 		}
+		System.out.println("Movimento escolhido:\t"+opcao+"\n");
 	}
 	
 	public ArrayList<Maquina> getSolucao() {

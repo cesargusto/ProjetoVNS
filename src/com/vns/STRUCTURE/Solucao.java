@@ -125,13 +125,17 @@ public class Solucao implements Cloneable{
 		int pm1 = -1;
 		int pm2 = -1;
 		
-		while(pm1 == pm2){
-			pm1 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
-			pm2 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq() - 1);
-		}
+		pm1 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
 		
 		int job = this.solucao.get(indice_maior).getJob(pm1);
 		this.solucao.get(indice_maior).removeJob(pm1);
+		
+		pm2 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
+		
+		while(pm1 == pm2){
+			pm2 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
+		}
+		
 		this.solucao.get(indice_maior).setJobMaq(pm2, job);
 		
 	}
@@ -241,7 +245,9 @@ public class Solucao implements Cloneable{
 			Switch();
 			break;
 		case 4:
-			if(solucao.get(maior_menor.get(0)).getTamMaq() > 2)
+			int t_maior = solucao.get(maior_menor.get(2)).getTamMaq();
+			int t_menor = solucao.get(maior_menor.get(0)).getTamMaq(); 
+			if ((t_maior > 2) && (t_menor > 2))
 				Swap();
 			else
 				task_move();

@@ -20,9 +20,9 @@ public class SA {
 	
 	public SA(Solucao solucao) {
 		this.solucao = solucao;
-		this.T_INICIAL = 100.0;
+		this.T_INICIAL = 800.0;
 		this.ALF = 0.9;
-		this.SAMAX = 10;
+		this.SAMAX = 100;
 	}
 	
 	public void execute() throws CloneNotSupportedException {

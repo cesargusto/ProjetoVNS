@@ -99,6 +99,7 @@ public class Solucao implements Cloneable{
 		return maior_menor;
 	}
 	
+	//move a task of the one machine to other machine
 	public void task_move(){
 		Random rnd = new Random();
 		ArrayList<Integer> maior_menor = new ArrayList<>(this.maior_menor());
@@ -234,6 +235,7 @@ public class Solucao implements Cloneable{
 		Random rnd = new Random();
 		int num_movimentos = 5;
 		int opcao = 1 + rnd.nextInt(num_movimentos);
+		System.out.println("Movimento escolhido:\t"+opcao+"\n");
 		switch(opcao){
 		case 1:
 			task_move();
@@ -261,7 +263,6 @@ public class Solucao implements Cloneable{
 		default:
 			System.out.println("Problema com o valor aleatório.");
 		}
-		System.out.println("Movimento escolhido:\t"+opcao+"\n");
 	}
 	
 	public ArrayList<Maquina> getSolucao() {

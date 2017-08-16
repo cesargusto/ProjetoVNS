@@ -123,6 +123,41 @@ public class Solucao implements Cloneable{
 		
 		int indice_maior = maior_menor.get(2);
 		
+		if(this.getMaq(indice_maior).getTamMaq() == 2) {
+			Collections.swap(solucao, 0, 1);
+		}
+		else {
+
+			int pm1 = -1;
+			int pm2 = -1;
+			
+			pm1 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
+			
+			int job = this.solucao.get(indice_maior).getJob(pm1);
+			this.solucao.get(indice_maior).removeJob(pm1);
+			
+			pm2 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
+			
+			while(pm1 == pm2){
+				pm2 = rnd.nextInt(this.getMaq(indice_maior).getTamMaq());
+			}
+			
+			this.solucao.get(indice_maior).setJobMaq(pm2, job);
+		}
+		
+		
+	}
+	
+	public void shift(boolean g){
+		Random rnd = new Random();
+		ArrayList<Integer> maior_menor = new ArrayList<>(this.maior_menor());
+		
+		int indice_maior = -1;
+		if(g)
+			indice_maior = maior_menor.get(2);
+		else
+			indice_maior = maior_menor.get(0);
+		
 		int pm1 = -1;
 		int pm2 = -1;
 		
@@ -232,6 +267,9 @@ public class Solucao implements Cloneable{
 		ArrayList<Integer> maior_menor = new ArrayList<>(this.maior_menor());
 		int indice_maior = maior_menor.get(2);
 		
+		int t_maior = solucao.get(maior_menor.get(2)).getTamMaq();
+		int t_menor = solucao.get(maior_menor.get(0)).getTamMaq(); 
+		
 		Random rnd = new Random();
 		int num_movimentos = 5;
 		int opcao = 1 + rnd.nextInt(num_movimentos);
@@ -247,8 +285,6 @@ public class Solucao implements Cloneable{
 			Switch();
 			break;
 		case 4:
-			int t_maior = solucao.get(maior_menor.get(2)).getTamMaq();
-			int t_menor = solucao.get(maior_menor.get(0)).getTamMaq(); 
 			if ((t_maior > 2) && (t_menor > 2))
 				Swap();
 			else

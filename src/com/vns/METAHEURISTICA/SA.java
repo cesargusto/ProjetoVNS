@@ -20,9 +20,9 @@ public class SA {
 	
 	public SA(Solucao solucao) {
 		this.solucao = solucao;
-		this.T_INICIAL = 800.0;
-		this.ALF = 0.9;
-		this.SAMAX = 100;
+		this.T_INICIAL = 300.0;
+		this.ALF = 0.7;
+		this.SAMAX = 50;
 	}
 	
 	public void execute() throws CloneNotSupportedException {
@@ -36,7 +36,7 @@ public class SA {
 		
 		melhor_solucao = solucao.clone();	// best solution receive the solution was given
 		
-		while(T > 0.0001){
+		while(T > 0.1){
 			while(IterT < SAMAX){
 				IterT += 1;
 				
@@ -44,8 +44,6 @@ public class SA {
 				solucao_linha = solucao.clone();
 				solucao_linha.gera_vizinho();
 				fo_solucao_linha = solucao_linha.makespan();
-				
-				solucao_linha.imprimeSolucao();
 				
 				long Alfa = fo_solucao_linha - fo_solucao;
 				
@@ -63,6 +61,7 @@ public class SA {
 						solucao = solucao_linha.clone();
 					}
 				}
+				solucao_linha.imprimeSolucao();
 			}
 			System.out.printf("\nTemperatura:\t%.4f\tMakespan:\t%d\n", T, fo_solucao_linha);
 			//tb.setMelhores_fo_sa(s_melhor.calculaFo());guarda evolucao

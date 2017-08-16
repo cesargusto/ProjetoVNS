@@ -20,14 +20,11 @@ public class Start {
 		Solucao so = new Solucao();
 		so.ConstroiSolution();
 		so.imprimeSolucao();
-		so.Swap();
-		so.imprimeSolucao();
-		/*so.task_move();
-		so.imprimeSolucao();
-		so.shift();
-		so.imprimeSolucao();
-		so.Switch();
+		/*so.Swap();
 		so.imprimeSolucao();*/
-
+		for(int i = 0;i < 500;i++) {
+			so.gera_vizinho();
+			so.imprimeSolucao();
+		}
 	}
 }
